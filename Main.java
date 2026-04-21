@@ -1,5 +1,5 @@
 //Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9
-//Matías Ignacio González Gómez 22.......
+//Matías Ignacio González Gómez 22.350.340-3
 package taller2;
 
 import java.io.BufferedReader;
