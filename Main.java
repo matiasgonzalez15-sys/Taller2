@@ -1,5 +1,3 @@
-//Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9
-//Matías Ignacio González Gómez 22.350.340-3
 package asd;
 
 import java.io.File;
@@ -18,6 +16,8 @@ public class Main {
 	public static int gimnasiosDerrotados = 0;
 
 	public static void main(String[] args) throws FileNotFoundException {
+		//Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9
+		//Matías Ignacio González Gómez 22.350.340-3
 		leerHabitats();
 		leerPokemons();
 		leerGimnasios();
@@ -147,8 +147,36 @@ public class Main {
 	}
 
 	private static void accesoPC(Persona p) {
-		
-		
+		int opcion = -1;
+
+		System.out.println();
+		boolean vacio = p.mostrarPC();
+		System.out.println();
+		if(vacio) {
+			try {	
+				
+				System.out.println("Que deseas hacer?");
+				System.out.println("1) Cambiar Pokemon");
+				System.out.println("2) Salir");
+				System.out.print("Ingrese una opcion: ");
+				opcion = Integer.valueOf(sc.nextLine());
+			}catch(Exception e) {
+				System.out.println("Ingrese una opcion valida");
+			}	
+			if(opcion == 1) {
+				System.out.println("OBSERVA LA LISTA ANTERIOR DE POKEMONES");
+				System.out.print("Numero del pokemon que deseas cambiar: ");
+				int opPokemon = Integer.valueOf(sc.nextLine());
+				System.out.print("Numero del pokemon que quieres agregar: ");
+				int opPokemonB = Integer.valueOf(sc.nextLine());
+				p.cambiarPokemon(opPokemon, opPokemonB);
+				
+				System.out.println("Cambio realizado con exito!!");
+				
+			}
+			System.out.println();
+		}	
+			
 	}
 
 	private static void curarPokemon(Persona p) {
@@ -181,30 +209,36 @@ public class Main {
 		} catch (Exception e) {
 			System.out.println("Ingrese una opcion valida");
 		}
-		Gimnasio gim = gimnasios.get(opcion - 1);
-		if (opcion - 1 > gimnasiosDerrotados) {
-			System.out.println("Calmado entrenador!!! No puedes retar a " + gim.getLider().getNombre()
-					+ " sin haber derrotado a los lideres anteriores!!!");
-
-		} else {
-			if (p.getPokemons().size() == 0) {
-				System.out.println("Captura pokemones antes de batallar en un gimnasio!!!");
+		if(opcion >= 1 && opcion <= 8) {
+			Gimnasio gim = gimnasios.get(opcion - 1);
+			if (opcion - 1 > gimnasiosDerrotados) {
+				System.out.println("Calmado entrenador!!! No puedes retar a " + gim.getLider().getNombre()
+						+ " sin haber derrotado a los lideres anteriores!!!");
+	
 			} else {
-				System.out.println();
-				System.out.println("Desafiando a " + gim.getLider().getNombre() + "!!");
-				System.out.println();
-
-				boolean gane = peleaPokemones(gim.getLider(), p);
-				if (gane) {
-					System.out.println("Gimnasio derrotado!!");
-					gimnasiosDerrotados += 1;
-					gim.setDerrotado("Derrotado");
+				if (p.getPokemons().size() == 0) {
+					System.out.println("Captura pokemones antes de batallar en un gimnasio!!!");
 				} else {
-					System.out.println("Volviendo al menu...");
 					System.out.println();
+					System.out.println("Desafiando a " + gim.getLider().getNombre() + "!!");
+					System.out.println();
+	
+					boolean gane = peleaPokemones(gim.getLider(), p);
+					if (gane) {
+						System.out.println("Gimnasio derrotado!!");
+						gimnasiosDerrotados += 1;
+						gim.setDerrotado("Derrotado");
+					} else {
+						System.out.println("Volviendo al menu...");
+						System.out.println();
+					}
 				}
+	
 			}
-
+		}	
+		else if(opcion == 9) {
+			System.out.println();
+			System.out.println("Volviendo al menu...");
 		}
 
 		System.out.println();
