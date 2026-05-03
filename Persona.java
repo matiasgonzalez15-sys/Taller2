@@ -49,6 +49,32 @@ public class Persona {
 		System.out.println();
 		
 	}
+
+	public boolean mostrarPC() {
+		if(pokemons.isEmpty()) {
+			System.out.println("No tienes pokemons en tu PC!!");
+			return false;
+		}
+		else {	
+			System.out.println("=== PC ===");
+			System.out.println("CONSIDERA QUE HASTA LOS 6 PRIMEROS SON PARTE DE TU EQUIPO!!!");
+			System.out.println();
+			
+			for(int i = 0; i < pokemons.size(); i++) {
+				System.out.println(i+1 + ") " + pokemons.get(i).getNombre() + " | " + pokemons.get(i).getTipo() + " | Stats totales: " + pokemons.get(i).getStatsTotales());
+							
+			}
+			
+		}
+		return true;	
+		
+	}
+
+	public void cambiarPokemon(int opPokemon, int opPokemonB) {
+		pokemons.set(opPokemon - 1, pokemons.get(opPokemonB - 1));
+		pokemons.set(opPokemonB- 1, pokemons.get(opPokemon - 1));
+		
+	}
 	
 	
 
