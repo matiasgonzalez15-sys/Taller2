@@ -1,9 +1,9 @@
-package taller2;
+package asd;
 
 public class Pokemon {
 	private String nombre;
-	private String habitat;
-	private double porcentajeAparicion;
+	private Habitat habitat;
+	private double porcentaje;
 	private int vida;
 	private int ataque;
 	private int defensa;
@@ -11,13 +11,14 @@ public class Pokemon {
 	private int defensaEspecial;
 	private int velocidad;
 	private String tipo;
-
-	public Pokemon(String nombre, String habitat, double porcentajeAparicion, int vida, int ataque, int defensa,
+	private int statsTotales;
+	private boolean vivo;
+	
+	public Pokemon(String nombre, Habitat habitat, double porcentaje, int vida, int ataque, int defensa,
 			int ataqueEspecial, int defensaEspecial, int velocidad, String tipo) {
-
 		this.nombre = nombre;
 		this.habitat = habitat;
-		this.porcentajeAparicion = porcentajeAparicion;
+		this.porcentaje = porcentaje;
 		this.vida = vida;
 		this.ataque = ataque;
 		this.defensa = defensa;
@@ -25,26 +26,20 @@ public class Pokemon {
 		this.defensaEspecial = defensaEspecial;
 		this.velocidad = velocidad;
 		this.tipo = tipo;
-	}
-	
-	@Override
-	public String toString() {
-		return "Pokemon [nombre=" + nombre + ", habitat=" + habitat + ", porcentajeAparicion=" + porcentajeAparicion
-				+ ", vida=" + vida + ", ataque=" + ataque + ", defensa=" + defensa + ", ataqueEspecial="
-				+ ataqueEspecial + ", defensaEspecial=" + defensaEspecial + ", velocidad=" + velocidad + ", tipo="
-				+ tipo + "]";
+		this.statsTotales = 0;
+		this.vivo = true;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public String getHabitat() {
+	public Habitat getHabitat() {
 		return habitat;
 	}
 
-	public Double getPorcentajeAparicion() {
-		return porcentajeAparicion;
+	public double getPorcentaje() {
+		return porcentaje;
 	}
 
 	public int getVida() {
@@ -74,5 +69,22 @@ public class Pokemon {
 	public String getTipo() {
 		return tipo;
 	}
+	public void sumarEstadisticas() {
+		this.statsTotales = this.ataque + this.defensa + this.ataqueEspecial + this.defensaEspecial;
+	}
 
+	public int getStatsTotales() {
+		return statsTotales;
+	}
+
+	public boolean isVivo() {
+		return vivo;
+	}
+
+	public void setVivo(boolean vivo) {
+		this.vivo = vivo;
+	}
+	
+	
+	
 }
