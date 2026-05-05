@@ -71,8 +71,9 @@ public class Persona {
 	}
 
 	public void cambiarPokemon(int opPokemon, int opPokemonB) {
+		Pokemon temp = pokemons.get(opPokemon - 1);
 		pokemons.set(opPokemon - 1, pokemons.get(opPokemonB - 1));
-		pokemons.set(opPokemonB- 1, pokemons.get(opPokemon - 1));
+		pokemons.set(opPokemonB- 1, temp);
 		
 	}
 	
