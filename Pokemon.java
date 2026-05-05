@@ -70,7 +70,7 @@ public class Pokemon {
 		return tipo;
 	}
 	public void sumarEstadisticas() {
-		this.statsTotales = this.ataque + this.defensa + this.ataqueEspecial + this.defensaEspecial;
+		this.statsTotales = this.ataque + this.defensa + this.ataqueEspecial + this.defensaEspecial + this.vida;
 	}
 
 	public int getStatsTotales() {
