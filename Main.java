@@ -1,7 +1,10 @@
 package asd;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -13,16 +16,41 @@ public class Main {
 	public static List<Habitat> habitats = new LinkedList<Habitat>();
 	public static List<Gimnasio> gimnasios = new LinkedList<Gimnasio>();
 	public static List<Pokemon> pokemones = new LinkedList<Pokemon>();
+	public static List<Persona> altosMandos = new LinkedList<Persona>();
+	
+	
 	public static int gimnasiosDerrotados = 0;
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		//Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9
 		//Matías Ignacio González Gómez 22.350.340-3
 		leerHabitats();
 		leerPokemons();
 		leerGimnasios();
+		leerAltoMando();
 		menuPrincipal();
 
+	}
+
+	private static void leerAltoMando() throws FileNotFoundException {
+		File arch = new File("AltoMando.txt");
+		Scanner lector = new Scanner(arch);
+		
+		while(lector.hasNext()) {
+			String linea = lector.nextLine();
+			String[] partes = linea.split(";");
+			String nombre = partes[1];
+			Persona p = new Persona(nombre);
+			for(int i = 2; i < partes.length; i++) {
+				Pokemon pok = buscarPokemon(partes[i]);
+				if(pok != null) {
+					p.agregarPokemon(pok);
+				}
+				
+			}
+			altosMandos.add(p);
+		}
+		
 	}
 
 	private static void leerGimnasios() throws FileNotFoundException {
@@ -60,7 +88,7 @@ public class Main {
 		return null;
 	}
 
-	private static void menuPrincipal() {
+	private static void menuPrincipal() throws IOException {
 		int opcion = -1;
 		while (opcion != 3) {
 			try {
@@ -75,9 +103,10 @@ public class Main {
 
 			switch (opcion) {
 			case 1:
+				continuarPartida();
 				break;
 			case 2:
-				crearPartidad();
+				crearPartidas();
 				break;
 			case 3:
 				System.out.println("Saliendo...");
@@ -87,7 +116,14 @@ public class Main {
 
 	}
 
-	private static void crearPartidad() {
+
+
+	private static void continuarPartida() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void crearPartidas() throws IOException {
 		System.out.println();
 		System.out.print("Ingrese apodo: ");
 		String apodo = sc.nextLine();
@@ -129,11 +165,13 @@ public class Main {
 				retarGimnasio(p);
 				break;
 			case 5:
+				altoMando(p);
 				break;
 			case 6:
 				curarPokemon(p);
 				break;
 			case 7:
+				guardarPartida(p);
 				break;
 			case 8:
 				System.out.println("Hasta luego entrenador!!");
@@ -144,6 +182,66 @@ public class Main {
 
 		}
 
+	}
+
+	private static void guardarPartida(Persona p) throws IOException {
+		System.out.println();
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Registros.txt"));
+		String linea = p.getNombre();
+		if(gimnasiosDerrotados == 0) {
+			bw.write(linea+";"+"none");
+			bw.newLine();	
+		}
+		else {
+			for(Gimnasio g: gimnasios) {
+				if(g.getDerrotado().equals("Derrotado")) {
+					linea += ";" + g.getLider().getNombre();
+				}
+			}
+			bw.write(linea);
+			bw.newLine();
+		}
+		
+		for(Pokemon pok: p.getPokemons()) {
+			String lineaP = null;
+			if(pok.isVivo()) {
+				lineaP = pok.getNombre() + ";" + "Vivo";
+				bw.write(lineaP);
+			}
+			else {
+				lineaP = pok.getNombre() + ";" + "Muerto";
+				bw.write(lineaP);
+			}
+			bw.newLine();
+			
+		}
+		bw.close();
+		System.out.println("Partida guardada con exito!!!");
+		System.out.println();
+		
+	}
+
+	private static void altoMando(Persona p) {
+		System.out.println();
+		if(gimnasiosDerrotados < gimnasios.size()) {
+			System.out.println("No puedes batallar contra los Altos Mandos!!!, no has derrotado a todos los gimnasios");
+		}
+		else {
+			for(Persona campeon: altosMandos) {
+				System.out.println("Enfrentandose a " + campeon.getNombre());
+				System.out.println();
+				boolean vencido = peleaPokemones(campeon, p);
+				if(vencido) {
+					System.out.println("Has derrotado a " + campeon.getNombre());
+				}
+				else {
+					System.out.println("Has perdido...");
+					break;
+				}
+			}
+		}
+		System.out.println();
+		
 	}
 
 	private static void accesoPC(Persona p) {
