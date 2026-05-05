@@ -31,7 +31,14 @@ public class Persona {
 		System.out.println();
 		for(Pokemon p : pokemons) {
 			if(c < 6) {
-				System.out.println(p.getNombre() + " | " + p.getTipo() + " | Stats totales: "+ p.getStatsTotales());
+				String estado = "";
+				if(p.isVivo()) {
+					estado = "Vivo";
+				}
+				else {
+					estado = "Muerto";
+				}
+				System.out.println(p.getNombre() + " | " + p.getTipo() + " | Stats totales: "+ p.getStatsTotales() + " | Estado: " + estado );
 				c++;
 			}	
 		}
