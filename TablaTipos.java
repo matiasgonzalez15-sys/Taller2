@@ -23,7 +23,7 @@ public class TablaTipos {
         {  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 0.5, 0.5 }, // SINIESTRO
         {  1.0, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 2.0, 1.0 }  // HADA
     };
-    public static int getIndice(String tipo) {
+    private static int getIndice(String tipo) {
         switch (tipo.toUpperCase()) {
             case "NORMAL":    return 0;
             case "FUEGO":     return 1;
