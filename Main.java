@@ -1,4 +1,4 @@
-package asd;
+package taller2;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,6 +19,7 @@ public class Main {
 	public static List<Persona> altosMandos = new LinkedList<Persona>();
 
 	public static int gimnasiosDerrotados = 0;
+	private static String opcion;
 
 	public static void main(String[] args) throws IOException {
 		// Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9
@@ -49,7 +50,7 @@ public class Main {
 			}
 			altosMandos.add(p);
 		}
-
+		lector.close();
 	}
 
 	private static void leerGimnasios() throws FileNotFoundException {
@@ -74,7 +75,7 @@ public class Main {
 			gimnasios.add(g);
 
 		}
-
+		lector.close();
 	}
 
 	private static Pokemon buscarPokemon(String nombre) {
@@ -88,26 +89,26 @@ public class Main {
 	}
 
 	private static void menuPrincipal() throws IOException {
-		int opcion = -1;
-		while (opcion != 3) {
+		opcion = null;
+		while (opcion.equals("3")) {
 			try {
 				System.out.println("1) Continuar.");
 				System.out.println("2) Nueva Partida.");
 				System.out.println("3) Salir");
 				System.out.print("Ingrese opcion: ");
-				opcion = Integer.valueOf(sc.nextLine());
+				opcion = sc.nextLine();
 			} catch (Exception InputMismatchException) {
 				System.out.println("Ingrese una opcion valida");
 			}
 
 			switch (opcion) {
-			case 1:
+			case "1":
 				continuarPartida();
 				break;
-			case 2:
+			case "2":
 				crearPartidas();
 				break;
-			case 3:
+			case "3":
 				System.out.println("Saliendo...");
 				break;
 			}
@@ -150,12 +151,12 @@ public class Main {
 					}
 
 				}
-
+			lector.close();
 			}
 			System.out.println("Bienvenido " + p.getNombre() + "!!!");
 			System.out.println();
-			int opcion = -1;
-			while (opcion != 8) {
+			String opcion = null;
+			while (opcion.equals("8")) {
 				try {
 					System.out.println(p.getNombre() + " , que deseas hacer?");
 					System.out.println();
@@ -168,35 +169,35 @@ public class Main {
 					System.out.println("7) Guardar.");
 					System.out.println("8) Guardar y Salir.");
 					System.out.print("Ingrese opcion: ");
-					opcion = Integer.valueOf(sc.nextLine());
+					opcion = sc.nextLine();
 
 				} catch (Exception e) {
 					System.out.println("Ingrese una opcion valida");
 					System.out.println();
 				}
 				switch (opcion) {
-				case 1:
+				case "1":
 					verEquipo(p);
 					break;
-				case 2:
+				case "2":
 					capturarPokemons(p);
 					break;
-				case 3:
+				case "3":
 					accesoPC(p);
 					break;
-				case 4:
+				case "4":
 					retarGimnasio(p);
 					break;
-				case 5:
+				case "5":
 					altoMando(p);
 					break;
-				case 6:
+				case "6":
 					curarPokemon(p);
 					break;
-				case 7:
+				case "7":
 					guardarPartida(p);
 					break;
-				case 8:
+				case "8":
 					guardarPartida(p);
 					System.out.println("Hasta luego entrenador!!");
 					System.out.println();
@@ -232,8 +233,8 @@ public class Main {
 		System.out.println();
 		System.out.println("Bienvenido " + p.getNombre() + "!!!");
 		System.out.println();
-		int opcion = -1;
-		while (opcion != 8) {
+		String opcion = null;
+		while (opcion.equals("8")) {
 			try {
 				System.out.println(p.getNombre() + " , que deseas hacer?");
 				System.out.println();
@@ -246,35 +247,35 @@ public class Main {
 				System.out.println("7) Guardar.");
 				System.out.println("8) Guardar y Salir.");
 				System.out.print("Ingrese opcion: ");
-				opcion = Integer.valueOf(sc.nextLine());
+				opcion = sc.nextLine();
 
 			} catch (Exception e) {
 				System.out.println("Ingrese una opcion valida");
 				System.out.println();
 			}
 			switch (opcion) {
-			case 1:
+			case "1":
 				verEquipo(p);
 				break;
-			case 2:
+			case "2":
 				capturarPokemons(p);
 				break;
-			case 3:
+			case "3":
 				accesoPC(p);
 				break;
-			case 4:
+			case "4":
 				retarGimnasio(p);
 				break;
-			case 5:
+			case "5":
 				altoMando(p);
 				break;
-			case 6:
+			case "6":
 				curarPokemon(p);
 				break;
-			case 7:
+			case "7":
 				guardarPartida(p);
 				break;
-			case 8:
+			case "8":
 				guardarPartida(p);
 				System.out.println("Hasta luego entrenador!!");
 				System.out.println();
