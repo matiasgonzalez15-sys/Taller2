@@ -1,32 +1,31 @@
-package asd;
+package taller2;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class Habitat {
 	private String nombre;
-	private List<Pokemon> pokemones;
-	
+	private LinkedList<Pokemon> pokemones;
+
 	public Habitat(String nombre) {
 		this.nombre = nombre;
 		this.pokemones = new LinkedList<Pokemon>();
 	}
 
-	public String getNombre() {
-		return nombre;
+	public void agregarPokemon(int aparicion, Pokemon p) {
+		pokemones.add(p);
 	}
 
-	public List<Pokemon> getPokemones() {
+	public LinkedList<Pokemon> getPokemones() {
 		return pokemones;
 	}
 
-	public void agregarPokemon(int aparicion, Pokemon p) {
-		for(int i = 0; i < aparicion; i++) {
-			pokemones.add(p);
-		}
-		
+	@Override
+	public String toString() {
+		return nombre;
 	}
-	
-	
+
+	public String getNombre() {
+		return nombre;
+	}
 
 }
