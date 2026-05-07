@@ -33,7 +33,7 @@ public class Main {
 	}
 
 	private static void leerAltoMando() throws FileNotFoundException {
-		File arch = new File("AltoMando.txt");
+		File arch = new File("Alto Mando.txt");
 		Scanner lector = new Scanner(arch);
 
 		while (lector.hasNext()) {
@@ -89,8 +89,8 @@ public class Main {
 	}
 
 	private static void menuPrincipal() throws IOException {
-		opcion = null;
-		while (opcion.equals("3")) {
+		opcion = "";
+		while (!opcion.equals("3")) {
 			try {
 				System.out.println("1) Continuar.");
 				System.out.println("2) Nueva Partida.");
@@ -138,7 +138,7 @@ public class Main {
 			}
 			while (lector.hasNext()) { // Guardando pokemones
 				linea = lector.nextLine();
-				if (linea != "") {
+				if (!linea.equals("")) {
 					String[] partes2 = linea.split(";");
 					String nombrePokemon = partes2[0];
 					String estado = partes2[1];
@@ -151,12 +151,12 @@ public class Main {
 					}
 
 				}
-			lector.close();
 			}
+			lector.close();
 			System.out.println("Bienvenido " + p.getNombre() + "!!!");
 			System.out.println();
-			String opcion = null;
-			while (opcion.equals("8")) {
+			String opcion = "";
+			while (!opcion.equals("8")) {
 				try {
 					System.out.println(p.getNombre() + " , que deseas hacer?");
 					System.out.println();
@@ -233,8 +233,8 @@ public class Main {
 		System.out.println();
 		System.out.println("Bienvenido " + p.getNombre() + "!!!");
 		System.out.println();
-		String opcion = null;
-		while (opcion.equals("8")) {
+		String opcion = "";
+		while (!opcion.equals("8")) {
 			try {
 				System.out.println(p.getNombre() + " , que deseas hacer?");
 				System.out.println();
@@ -670,7 +670,7 @@ public class Main {
 			pokemones.add(p);
 
 		}
-
+		lector.close();
 	}
 
 	private static Habitat buscarHabitat(String habitat) {
@@ -693,7 +693,7 @@ public class Main {
 			Habitat h = new Habitat(habitat);
 			habitats.add(h);
 		}
-
+		lector.close();
 	}
 
 }
