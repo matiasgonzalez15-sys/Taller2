@@ -1,4 +1,4 @@
-package taller2;
+package asd;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,11 +19,10 @@ public class Main {
 	public static List<Persona> altosMandos = new LinkedList<Persona>();
 
 	public static int gimnasiosDerrotados = 0;
-	private static String opcion;
 
 	public static void main(String[] args) throws IOException {
-		// Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9
-		// Matías Ignacio González Gómez 22.350.340-3
+		// Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9 - ICCI
+		// Matías Ignacio González Gómez 22.350.340-3 - ICCI
 		leerHabitats();
 		leerPokemons();
 		leerGimnasios();
@@ -31,9 +30,9 @@ public class Main {
 		menuPrincipal();
 
 	}
-
+	// lee el archivo de los altosMandos
 	private static void leerAltoMando() throws FileNotFoundException {
-		File arch = new File("Alto Mando.txt");
+		File arch = new File("AltoMando.txt");
 		Scanner lector = new Scanner(arch);
 
 		while (lector.hasNext()) {
@@ -50,9 +49,9 @@ public class Main {
 			}
 			altosMandos.add(p);
 		}
-		lector.close();
-	}
 
+	}
+	// lee el archivo de los gimnasios
 	private static void leerGimnasios() throws FileNotFoundException {
 		File arch = new File("Gimnasios.txt");
 		Scanner lector = new Scanner(arch);
@@ -75,9 +74,9 @@ public class Main {
 			gimnasios.add(g);
 
 		}
-		lector.close();
-	}
 
+	}
+	// busca el pokemon por su nombre y lo retorna
 	private static Pokemon buscarPokemon(String nombre) {
 		for (Pokemon p : pokemones) {
 			if (p.getNombre().equals(nombre)) {
@@ -87,42 +86,45 @@ public class Main {
 		}
 		return null;
 	}
-
+	// menu inicial
 	private static void menuPrincipal() throws IOException {
-		opcion = "";
-		while (!opcion.equals("3")) {
+		int opcion = -1;
+		while (opcion != 3) {
 			try {
 				System.out.println("1) Continuar.");
 				System.out.println("2) Nueva Partida.");
 				System.out.println("3) Salir");
 				System.out.print("Ingrese opcion: ");
-				opcion = sc.nextLine();
+				opcion = Integer.valueOf(sc.nextLine());
 			} catch (Exception InputMismatchException) {
 				System.out.println("Ingrese una opcion valida");
 			}
 
 			switch (opcion) {
-			case "1":
+			case 1:
 				continuarPartida();
 				break;
-			case "2":
+			case 2:
 				crearPartidas();
 				break;
-			case "3":
+			case 3:
 				System.out.println("Saliendo...");
 				break;
+			default:
+				System.out.println("Ingrese opcion correcta");
 			}
-			break;
 		}
 
 	}
 
 	private static void continuarPartida() throws IOException {
+
 		System.out.println();
 		File arch = new File("Registros.txt");
 		if (arch.length() == 0) {
 			System.out.println("No hay partida guardada...");
 		} else { // Creando usuario
+			gimnasiosDerrotados = 0;
 			Scanner lector = new Scanner(arch);
 			String linea = lector.nextLine();
 			String[] partes = linea.split(";");
@@ -144,19 +146,19 @@ public class Main {
 					String estado = partes2[1];
 					Pokemon pok = buscarPokemon(nombrePokemon);
 					if (pok != null) {
-						if (estado.equals("Muerto")) {
+						if (estado.equals("Debilitado")) {
 							pok.setVivo(false);
 						}
 						p.agregarPokemon(pok);
 					}
 
 				}
+
 			}
-			lector.close();
 			System.out.println("Bienvenido " + p.getNombre() + "!!!");
 			System.out.println();
-			String opcion = "";
-			while (!opcion.equals("8")) {
+			int opcion = -1;
+			while (opcion != 8) {
 				try {
 					System.out.println(p.getNombre() + " , que deseas hacer?");
 					System.out.println();
@@ -169,41 +171,42 @@ public class Main {
 					System.out.println("7) Guardar.");
 					System.out.println("8) Guardar y Salir.");
 					System.out.print("Ingrese opcion: ");
-					opcion = sc.nextLine();
+					opcion = Integer.valueOf(sc.nextLine());
 
 				} catch (Exception e) {
 					System.out.println("Ingrese una opcion valida");
 					System.out.println();
 				}
 				switch (opcion) {
-				case "1":
+				case 1:
 					verEquipo(p);
 					break;
-				case "2":
+				case 2:
 					capturarPokemons(p);
 					break;
-				case "3":
+				case 3:
 					accesoPC(p);
 					break;
-				case "4":
+				case 4:
 					retarGimnasio(p);
 					break;
-				case "5":
+				case 5:
 					altoMando(p);
 					break;
-				case "6":
+				case 6:
 					curarPokemon(p);
 					break;
-				case "7":
+				case 7:
 					guardarPartida(p);
 					break;
-				case "8":
+				case 8:
 					guardarPartida(p);
 					System.out.println("Hasta luego entrenador!!");
 					System.out.println();
 					break;
 
 				}
+			
 
 			}
 
@@ -226,6 +229,7 @@ public class Main {
 	}
 
 	private static void crearPartidas() throws IOException {
+		limpiarGimnasios();
 		System.out.println();
 		System.out.print("Ingrese apodo: ");
 		String apodo = sc.nextLine();
@@ -233,8 +237,8 @@ public class Main {
 		System.out.println();
 		System.out.println("Bienvenido " + p.getNombre() + "!!!");
 		System.out.println();
-		String opcion = "";
-		while (!opcion.equals("8")) {
+		int opcion = -1;
+		while (opcion != 8) {
 			try {
 				System.out.println(p.getNombre() + " , que deseas hacer?");
 				System.out.println();
@@ -247,35 +251,35 @@ public class Main {
 				System.out.println("7) Guardar.");
 				System.out.println("8) Guardar y Salir.");
 				System.out.print("Ingrese opcion: ");
-				opcion = sc.nextLine();
+				opcion = Integer.valueOf(sc.nextLine());
 
 			} catch (Exception e) {
 				System.out.println("Ingrese una opcion valida");
 				System.out.println();
 			}
 			switch (opcion) {
-			case "1":
+			case 1:
 				verEquipo(p);
 				break;
-			case "2":
+			case 2:
 				capturarPokemons(p);
 				break;
-			case "3":
+			case 3:
 				accesoPC(p);
 				break;
-			case "4":
+			case 4:
 				retarGimnasio(p);
 				break;
-			case "5":
+			case 5:
 				altoMando(p);
 				break;
-			case "6":
+			case 6:
 				curarPokemon(p);
 				break;
-			case "7":
+			case 7:
 				guardarPartida(p);
 				break;
-			case "8":
+			case 8:
 				guardarPartida(p);
 				System.out.println("Hasta luego entrenador!!");
 				System.out.println();
@@ -284,6 +288,17 @@ public class Main {
 			}
 
 		}
+
+	}
+
+	private static void limpiarGimnasios() {
+		for (Gimnasio g : gimnasios) {
+			String estado = g.getDerrotado();
+			if (estado.equals("Derrotado")) {
+				g.setDerrotado("Sin derrotar");
+			}
+		}
+		gimnasiosDerrotados = 0;
 
 	}
 
@@ -310,7 +325,7 @@ public class Main {
 				lineaP = pok.getNombre() + ";" + "Vivo";
 				bw.write(lineaP);
 			} else {
-				lineaP = pok.getNombre() + ";" + "Muerto";
+				lineaP = pok.getNombre() + ";" + "Debilitado";
 				bw.write(lineaP);
 			}
 			bw.newLine();
@@ -368,8 +383,14 @@ public class Main {
 				int opPokemonB = Integer.valueOf(sc.nextLine());
 				p.cambiarPokemon(opPokemon, opPokemonB);
 
-				System.out.println("Cambio realizado con exito!!");
+				
 
+			}
+			else if(opcion == 2) {
+				System.out.println("Saliendo...");
+			}
+			else {
+				System.out.println("Opcion invalida");
 			}
 			System.out.println();
 		}
@@ -383,12 +404,12 @@ public class Main {
 			if (!pok.isVivo()) {
 				pok.setVivo(true);
 				muertos++;
-				
+
 				System.out.println(pok.getNombre() + " ha sido curado!!");
 
 			}
 		}
-		if(muertos == 0) {
+		if (muertos == 0) {
 			System.out.println("No tienes pokemons muertos!!");
 		}
 		System.out.println();
@@ -421,11 +442,9 @@ public class Main {
 			} else {
 				if (p.getPokemons().size() == 0) {
 					System.out.println("Captura pokemones antes de batallar en un gimnasio!!!");
-				}
-				else if(gim.getDerrotado().equals("Derrotado")) {
+				} else if (gim.getDerrotado().equals("Derrotado")) {
 					System.out.println("Este gimnasio ya lo has derrotado!");
-				}
-				else {
+				} else {
 					System.out.println();
 					System.out.println("Desafiando a " + gim.getLider().getNombre() + "!!");
 					System.out.println();
@@ -445,6 +464,10 @@ public class Main {
 		} else if (opcion == 9) {
 			System.out.println();
 			System.out.println("Volviendo al menu...");
+		}
+		else {
+			System.out.println();
+			System.out.println("Opcion invalida");
 		}
 
 		System.out.println();
@@ -595,29 +618,46 @@ public class Main {
 			System.out.println("Ingrese una opcion valida");
 		}
 		System.out.println();
-		Habitat habitatElegido = habitats.get(opcion - 1);
-		Random random = new Random();
-		int indiceRandom = random.nextInt(habitatElegido.getPokemones().size());
-		Pokemon pokemonRandom = habitatElegido.getPokemones().get(indiceRandom);
-		System.out.println("Oh!! Ha aparecido un increible " + pokemonRandom.getNombre());
-		System.out.println();
-		System.out.println("Que deseas hacer?");
-		System.out.println();
-		System.out.println("1) Capturar");
-		System.out.println("2) Huir");
-		System.out.print("Ingrese opcion: ");
-		int opcionPokemon = Integer.valueOf(sc.nextLine());
-		switch (opcionPokemon) {
-		case 1:
-			p.agregarPokemon(pokemonRandom);
+		if (opcion == 7) {
+			System.out.println("Volviendo al menú...");
+		}
+		else if(opcion >= 1 && opcion < 7) {
+			Habitat habitatElegido = habitats.get(opcion - 1);
+			Random random = new Random();
+			int indiceRandom = random.nextInt(habitatElegido.getPokemones().size());
+			Pokemon pokemonRandom = habitatElegido.getPokemones().get(indiceRandom);
+			System.out.println("Oh!! Ha aparecido un increible " + pokemonRandom.getNombre());
 			System.out.println();
-			System.out.println(pokemonRandom.getNombre() + " capturado con exito!!");
-			System.out.println(pokemonRandom.getNombre() + " ha sido agregado a tu equipo.");
+			System.out.println("Que deseas hacer?");
 			System.out.println();
-			break;
-		case 2:
-			System.out.println("Huyendo...");
-			break;
+			System.out.println("1) Capturar");
+			System.out.println("2) Huir");
+			System.out.print("Ingrese opcion: ");
+			int opcionPokemon = Integer.valueOf(sc.nextLine());
+			switch (opcionPokemon) {
+			case 1:
+				boolean encontrado = p.buscarPokemon(pokemonRandom);
+				if (!encontrado) {
+					p.agregarPokemon(pokemonRandom);
+					System.out.println();
+					System.out.println(pokemonRandom.getNombre() + " capturado con exito!!");
+					System.out.println(pokemonRandom.getNombre() + " ha sido agregado a tu equipo.");
+					System.out.println();
+				} else {
+					System.out.println("Este pokemon ya lo has capturado!!");
+				}
+				break;
+			case 2:
+				System.out.println("Huyendo...");
+				break;
+			default:
+				System.out.println("Opcion invalida");	
+			}
+			
+			System.out.println();
+		}
+		else {
+			System.out.println("Ingrese una opcion correcta");
 		}
 
 	}
@@ -670,7 +710,7 @@ public class Main {
 			pokemones.add(p);
 
 		}
-		lector.close();
+
 	}
 
 	private static Habitat buscarHabitat(String habitat) {
@@ -693,7 +733,7 @@ public class Main {
 			Habitat h = new Habitat(habitat);
 			habitats.add(h);
 		}
-		lector.close();
+
 	}
 
 }
