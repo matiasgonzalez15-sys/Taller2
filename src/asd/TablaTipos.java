@@ -46,7 +46,13 @@ public class TablaTipos {
             default: return -1;
         }
     }
-
+	/**
+	 * Retorna el multiplicador de efectividad entre dos tipos de Pokemon
+	 * usando la matriz de 18x18.
+	 * @param tipoAtacante Tipo del Pokemon atacante.
+	 * @param tipoDefensor Tipo del Pokemon defensor.
+	 * @return 2.0 si es efectivo, 0.5 si es poco eficaz, 0.0 si es inmune, 1.0 si es neutral.
+	 */
     public static double getEfectividad(String tipoAtacante, String tipoDefensor) {
         int fila = getIndice(tipoAtacante);
         int columna = getIndice(tipoDefensor);
