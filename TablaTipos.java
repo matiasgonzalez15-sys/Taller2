@@ -1,69 +1,56 @@
-package taller2;
+package asd;
 
 public class TablaTipos {
+	 // Matriz de efectividad
+    private static final double[][] efectividad = {
+        // NOR  FUE  AGU  PLA  ELE  HIE  LUC  VEN  TIE  VOL  PSI  BIC  ROC  FAN  DRA  ACE  SIN  HAD
+        {  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 0.0, 1.0, 0.5, 1.0, 1.0 }, // NORMAL
+        {  1.0, 0.5, 0.5, 2.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 0.5, 2.0, 1.0, 1.0 }, // FUEGO
+        {  1.0, 2.0, 0.5, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 2.0, 1.0, 0.5, 1.0, 1.0, 1.0 }, // AGUA
+        {  1.0, 0.5, 2.0, 0.5, 1.0, 1.0, 1.0, 0.5, 2.0, 0.5, 1.0, 0.5, 2.0, 1.0, 0.5, 0.5, 1.0, 1.0 }, // PLANTA
+        {  1.0, 1.0, 2.0, 0.5, 0.5, 1.0, 1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0 }, // ELECTRICO
+        {  1.0, 0.5, 0.5, 2.0, 1.0, 0.5, 1.0, 1.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 1.0 }, // HIELO
+        {  2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 0.5, 1.0, 0.5, 0.5, 0.5, 2.0, 0.0, 1.0, 2.0, 2.0, 0.5 }, // LUCHA
+        {  1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.5, 0.5, 1.0, 1.0, 1.0, 0.5, 0.5, 1.0, 0.0, 1.0, 2.0 }, // VENENO
+        {  1.0, 2.0, 1.0, 0.5, 2.0, 1.0, 1.0, 2.0, 1.0, 0.0, 1.0, 0.5, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0 }, // TIERRA
+        {  1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 1.0, 0.5, 1.0, 1.0 }, // VOLADOR
+        {  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 1.0, 0.5, 0.0, 1.0 }, // PSIQUICO
+        {  1.0, 0.5, 1.0, 2.0, 1.0, 1.0, 0.5, 0.5, 1.0, 0.5, 2.0, 1.0, 1.0, 0.5, 1.0, 0.5, 2.0, 0.5 }, // BICHO
+        {  1.0, 2.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 0.5, 2.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0 }, // ROCA
+        {  0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 0.5, 1.0 }, // FANTASMA
+        {  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 0.0 }, // DRAGON
+        {  1.0, 0.5, 0.5, 1.0, 0.5, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 0.5, 1.0, 2.0 }, // ACERO
+        {  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 0.5, 0.5 }, // SINIESTRO
+        {  1.0, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 2.0, 1.0 }  // HADA
+    };
+    private static int getIndice(String tipo) {
+        switch (tipo.toUpperCase()) {
+            case "NORMAL":    return 0;
+            case "FUEGO":     return 1;
+            case "AGUA":      return 2;
+            case "PLANTA":    return 3;
+            case "ELECTRICO": return 4;
+            case "HIELO":     return 5;
+            case "LUCHA":     return 6;
+            case "VENENO":    return 7;
+            case "TIERRA":    return 8;
+            case "VOLADOR":   return 9;
+            case "PSIQUICO":  return 10;
+            case "BICHO":     return 11;
+            case "ROCA":      return 12;
+            case "FANTASMA":  return 13;
+            case "DRAGON":    return 14;
+            case "ACERO":     return 15;
+            case "SINIESTRO": return 16;
+            case "HADA":      return 17;
+            default: return -1;
+        }
+    }
 
-	public TablaTipos() {
-		// TODO Auto-generated constructor stub
-	}
+    public static double getEfectividad(String tipoAtacante, String tipoDefensor) {
+        int fila = getIndice(tipoAtacante);
+        int columna = getIndice(tipoDefensor);
+        return efectividad[fila][columna];
+    }
 
-	public static double getEfectividad(String tipoAtacante, String tipoDefensor) {
-		switch (tipoAtacante) {
-		case "Fuego":
-			if (tipoDefensor.equals("Planta") || tipoDefensor.equals("Hielo") || tipoDefensor.equals("Bicho")) return 2.0;
-			if (tipoDefensor.equals("Fuego") || tipoDefensor.equals("Agua") || tipoDefensor.equals("Roca") || tipoDefensor.equals("Dragon")) return 0.5;
-			break;
-		case "Agua":
-			if (tipoDefensor.equals("Fuego") || tipoDefensor.equals("Roca") || tipoDefensor.equals("Tierra")) return 2.0;
-			if (tipoDefensor.equals("Agua") || tipoDefensor.equals("Planta") || tipoDefensor.equals("Dragon")) return 0.5;
-			break;
-		case "Planta":
-			if (tipoDefensor.equals("Agua") || tipoDefensor.equals("Roca") || tipoDefensor.equals("Tierra")) return 2.0;
-			if (tipoDefensor.equals("Fuego") || tipoDefensor.equals("Planta") || tipoDefensor.equals("Veneno") || tipoDefensor.equals("Dragon") || tipoDefensor.equals("Bicho") || tipoDefensor.equals("Volador")) return 0.5;
-			break;
-		case "Electrico":
-			if (tipoDefensor.equals("Agua") || tipoDefensor.equals("Volador")) return 2.0;
-			if (tipoDefensor.equals("Electrico") || tipoDefensor.equals("Dragon") || tipoDefensor.equals("Planta")) return 0.5;
-			break;
-		case "Hielo":
-			if (tipoDefensor.equals("Planta") || tipoDefensor.equals("Tierra") || tipoDefensor.equals("Volador") || tipoDefensor.equals("Dragon")) return 2.0;
-			if (tipoDefensor.equals("Agua") || tipoDefensor.equals("Hielo")) return 0.5;
-			break;
-		case "Lucha":
-			if (tipoDefensor.equals("Normal") || tipoDefensor.equals("Hielo") || tipoDefensor.equals("Roca")) return 2.0;
-			if (tipoDefensor.equals("Veneno") || tipoDefensor.equals("Bicho") || tipoDefensor.equals("Volador") || tipoDefensor.equals("Psiquico")) return 0.5;
-			break;
-		case "Veneno":
-			if (tipoDefensor.equals("Planta") || tipoDefensor.equals("Bicho")) return 2.0;
-			if (tipoDefensor.equals("Veneno") || tipoDefensor.equals("Tierra") || tipoDefensor.equals("Roca") || tipoDefensor.equals("Fantasma")) return 0.5;
-			break;
-		case "Tierra":
-			if (tipoDefensor.equals("Fuego") || tipoDefensor.equals("Electrico") || tipoDefensor.equals("Veneno") || tipoDefensor.equals("Roca")) return 2.0;
-			if (tipoDefensor.equals("Planta") || tipoDefensor.equals("Bicho")) return 0.5;
-			break;
-		case "Volador":
-			if (tipoDefensor.equals("Planta") || tipoDefensor.equals("Lucha") || tipoDefensor.equals("Bicho")) return 2.0;
-			if (tipoDefensor.equals("Electrico") || tipoDefensor.equals("Roca")) return 0.5;
-			break;
-		case "Psiquico":
-			if (tipoDefensor.equals("Lucha") || tipoDefensor.equals("Veneno")) return 2.0;
-			if (tipoDefensor.equals("Psiquico")) return 0.5;
-			break;
-		case "Bicho":
-			if (tipoDefensor.equals("Planta") || tipoDefensor.equals("Veneno") || tipoDefensor.equals("Psiquico")) return 2.0;
-			if (tipoDefensor.equals("Fuego") || tipoDefensor.equals("Lucha") || tipoDefensor.equals("Volador")) return 0.5;
-			break;
-		case "Roca":
-			if (tipoDefensor.equals("Fuego") || tipoDefensor.equals("Hielo") || tipoDefensor.equals("Volador") || tipoDefensor.equals("Bicho")) return 2.0;
-			if (tipoDefensor.equals("Lucha") || tipoDefensor.equals("Tierra")) return 0.5;
-			break;
-		case "Fantasma":
-			if (tipoDefensor.equals("Psiquico") || tipoDefensor.equals("Fantasma")) return 2.0;
-			if (tipoDefensor.equals("Normal")) return 0.5;
-			break;
-		case "Dragon":
-			if (tipoDefensor.equals("Dragon")) return 2.0;
-			break;
-		}
-		return 1.0;
-	}
 }
