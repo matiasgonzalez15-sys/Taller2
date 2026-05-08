@@ -1,4 +1,4 @@
-package asd;
+package taller2;
 
 public class Pokemon {
 	private String nombre;
