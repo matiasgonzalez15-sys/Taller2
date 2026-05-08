@@ -19,12 +19,17 @@ public class Persona {
 	public List<Pokemon> getPokemons() {
 		return pokemons;
 	}
-
+	/**
+	 * Agrega un Pokemon a la lista de la persona.
+	 * @param pokemonRandom El Pokemon a agregar.
+	 */
 	public void agregarPokemon(Pokemon pokemonRandom) {
 		pokemons.add(pokemonRandom);
 		
 	}
-
+	/**
+	 * Muestra los primeros 6 Pokemon del equipo con nombre, tipo, stats y estado.
+	 */
 	public void mostrarEquipo() {
 		int c = 0;
 		System.out.println("Tu equipo:");
@@ -46,7 +51,9 @@ public class Persona {
 		
 		
 	}
-
+	/**
+	 * Muestra el nombre y tipo de todos los Pokemon del lider (Gimnasio).
+	 */
 	public void mostrarPokemonsLider() {
 		System.out.println();
 		for(Pokemon p : pokemons) {
@@ -56,7 +63,10 @@ public class Persona {
 		System.out.println();
 		
 	}
-
+	/**
+	 * Muestra todos los Pokemon capturados numerados con nombre, tipo y stats.
+	 * @return true si tiene al menos un Pokemon, false si la lista esta vacia.
+	 */
 	public boolean mostrarPC() {
 		if(pokemons.isEmpty()) {
 			System.out.println("No tienes pokemons en tu PC!!");
@@ -76,7 +86,11 @@ public class Persona {
 		return true;	
 		
 	}
-
+	/**
+	 * Intercambia de posicion dos Pokemon en la lista usando sus indices.
+	 * @param opPokemon Indice del primer Pokemon (basado en 1).
+	 * @param opPokemonB Indice del segundo Pokemon (basado en 1).
+	 */
 	public void cambiarPokemon(int opPokemon, int opPokemonB) {
 		boolean error = true;
 	
@@ -94,7 +108,11 @@ public class Persona {
 	
 		
 	}
-
+	/**
+	 * Verifica si un Pokemon ya existe en la lista comparando por nombre.
+	 * @param pokemonRandom El Pokemon a buscar.
+	 * @return true si ya fue capturado, false si no.
+	 */
 	public boolean buscarPokemon(Pokemon pokemonRandom) {
 		for(Pokemon p : pokemons) {
 			if(pokemonRandom.getNombre().equals(p.getNombre())) {
