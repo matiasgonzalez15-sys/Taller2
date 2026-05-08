@@ -1,4 +1,4 @@
-package asd;
+package taller2;
 
 public class Gimnasio {
 	private int numero;
