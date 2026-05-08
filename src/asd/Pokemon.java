@@ -69,6 +69,10 @@ public class Pokemon {
 	public String getTipo() {
 		return tipo;
 	}
+	/**
+	 * Calcula y almacena la suma de todas las estadisticas del Pokemon
+	 * (vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad).
+	 */
 	public void sumarEstadisticas() {
 		this.statsTotales = this.ataque + this.defensa + this.ataqueEspecial + this.defensaEspecial + this.vida + this.velocidad;
 	}
