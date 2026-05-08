@@ -21,17 +21,12 @@ public class Main {
 	public static int gimnasiosDerrotados = 0;
 
 	public static void main(String[] args) throws IOException {
-		// Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9
-		// Matías Ignacio González Gómez 22.350.340-3
+		// Maximiliano Edhin Abd-El-Kader Gongora 22.128.215-9 - ICCI
+		// Matías Ignacio González Gómez 22.350.340-3 - ICCI
 		leerHabitats();
 		leerPokemons();
 		leerGimnasios();
 		leerAltoMando();
-		for(Pokemon p: pokemones) {
-			if(p.getNombre().equals("MegaBlaziken")) {
-				System.out.println("xd");
-			}
-		}
 		menuPrincipal();
 
 	}
@@ -151,7 +146,7 @@ public class Main {
 					String estado = partes2[1];
 					Pokemon pok = buscarPokemon(nombrePokemon);
 					if (pok != null) {
-						if (estado.equals("Muerto")) {
+						if (estado.equals("Debilitado")) {
 							pok.setVivo(false);
 						}
 						p.agregarPokemon(pok);
@@ -330,7 +325,7 @@ public class Main {
 				lineaP = pok.getNombre() + ";" + "Vivo";
 				bw.write(lineaP);
 			} else {
-				lineaP = pok.getNombre() + ";" + "Muerto";
+				lineaP = pok.getNombre() + ";" + "Debilitado";
 				bw.write(lineaP);
 			}
 			bw.newLine();
