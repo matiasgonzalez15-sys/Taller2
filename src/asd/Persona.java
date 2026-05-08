@@ -1,4 +1,4 @@
-package asd;
+package taller2;
 
 import java.util.LinkedList;
 import java.util.List;
