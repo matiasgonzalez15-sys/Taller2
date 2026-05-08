@@ -30,7 +30,10 @@ public class Main {
 		menuPrincipal();
 
 	}
-	// lee el archivo de los altosMandos
+	/*
+	 * Lee el archivo AltoMando.txt y crea una Persona por cada miembro,
+	 * asignandole sus pokemones correspondientes.
+	 */
 	private static void leerAltoMando() throws FileNotFoundException {
 		File arch = new File("AltoMando.txt");
 		Scanner lector = new Scanner(arch);
@@ -51,7 +54,10 @@ public class Main {
 		}
 
 	}
-	// lee el archivo de los gimnasios
+	/**
+	 * Lee el archivo Gimnasios.txt y crea un Gimnasio por cada linea,
+	 * asignandole su lider y sus pokemones correspondientes.
+	 */
 	private static void leerGimnasios() throws FileNotFoundException {
 		File arch = new File("Gimnasios.txt");
 		Scanner lector = new Scanner(arch);
@@ -76,7 +82,11 @@ public class Main {
 		}
 
 	}
-	// busca el pokemon por su nombre y lo retorna
+	/**
+	 * Busca un Pokemon en la lista global de pokemones por su nombre.
+	 * @param nombre El nombre del Pokemon a buscar.
+	 * @return El Pokemon encontrado, o null si no existe.
+	 */
 	private static Pokemon buscarPokemon(String nombre) {
 		for (Pokemon p : pokemones) {
 			if (p.getNombre().equals(nombre)) {
@@ -86,7 +96,10 @@ public class Main {
 		}
 		return null;
 	}
-	// menu inicial
+	/**
+	 * Muestra el menu principal del juego con las opciones de
+	 * continuar, nueva partida o salir.
+	 */
 	private static void menuPrincipal() throws IOException {
 		int opcion = -1;
 		while (opcion != 3) {
@@ -116,7 +129,10 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Carga la partida guardada en Registros.txt, restaurando el estado
+	 * del jugador, sus pokemones y los gimnasios derrotados.
+	 */
 	private static void continuarPartida() throws IOException {
 
 		System.out.println();
@@ -214,7 +230,10 @@ public class Main {
 		System.out.println();
 
 	}
-
+	/**
+	 * Marca un gimnasio como Derrotado buscandolo por el nombre de su lider.
+	 * @param nombreGim El nombre del lider del gimnasio a marcar.
+	 */
 	private static void cambiarEstadoGimnasio(String nombreGim) {
 		Gimnasio gym = null;
 		for (Gimnasio g : gimnasios) {
@@ -227,7 +246,10 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Crea una nueva partida solicitando un apodo al jugador,
+	 * limpiando el estado de los gimnasios previos.
+	 */
 	private static void crearPartidas() throws IOException {
 		limpiarGimnasios();
 		System.out.println();
@@ -290,7 +312,10 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Resetea todos los gimnasios a estado Sin derrotar y reinicia
+	 * el contador de gimnasios derrotados.
+	 */
 	private static void limpiarGimnasios() {
 		for (Gimnasio g : gimnasios) {
 			String estado = g.getDerrotado();
@@ -301,7 +326,11 @@ public class Main {
 		gimnasiosDerrotados = 0;
 
 	}
-
+	/**
+	 * Guarda el estado actual de la partida en Registros.txt,
+	 * incluyendo el nombre del jugador, gimnasios derrotados y pokemones con su estado.
+	 * @param p La persona (jugador) cuya partida se guarda.
+	 */
 	private static void guardarPartida(Persona p) throws IOException {
 		System.out.println();
 		BufferedWriter bw = new BufferedWriter(new FileWriter("Registros.txt"));
@@ -336,7 +365,11 @@ public class Main {
 		System.out.println();
 
 	}
-
+	/**
+	 * Permite al jugador desafiar al Alto Mando de forma consecutiva,
+	 * requiriendo haber derrotado los 8 gimnasios previamente.
+	 * @param p La persona (jugador) que desafia al Alto Mando.
+	 */
 	private static void altoMando(Persona p) {
 		System.out.println();
 		if (gimnasiosDerrotados < gimnasios.size()) {
@@ -362,7 +395,10 @@ public class Main {
 		System.out.println();
 
 	}
-
+	/**
+	 * Permite al jugador acceder al PC para intercambiar pokemones de posicion en su lista.
+	 * @param p La persona (jugador) que accede al PC.
+	 */
 	private static void accesoPC(Persona p) {
 		int opcion = -1;
 
@@ -401,7 +437,10 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Cura todos los pokemones debilitados del jugador, pasando su estado a Vivo.
+	 * @param p La persona (jugador) cuyos pokemones se curan.
+	 */
 	private static void curarPokemon(Persona p) {
 		System.out.println();
 		int muertos = 0;
@@ -420,7 +459,11 @@ public class Main {
 		System.out.println();
 
 	}
-
+	/**
+	 * Muestra los gimnasios disponibles y permite al jugador retar a uno,
+	 * respetando el orden consecutivo de desafios.
+	 * @param p La persona (jugador) que reta el gimnasio.
+	 */
 	private static void retarGimnasio(Persona p) {
 		int opcion = -1;
 		try {
@@ -477,7 +520,14 @@ public class Main {
 
 		System.out.println();
 	}
-
+	/**
+	 * Simula un combate entre el lider y el jugador. El jugador puede atacar,
+	 * cambiar de pokemon o rendirse. Aplica la tabla de tipos para calcular
+	 * el multiplicador de stats.
+	 * @param lider La persona que actua como rival (lider de gimnasio o Alto Mando).
+	 * @param p La persona (jugador).
+	 * @return true si el jugador gana, false si pierde o se rinde.
+	 */
 	private static boolean peleaPokemones(Persona lider, Persona p) {
 
 		int disponiblesA = lider.getPokemons().size();
@@ -602,7 +652,11 @@ public class Main {
 		return false;
 
 	}
-
+	/**
+	 * Permite al jugador explorar una zona y capturar un Pokemon aleatorio.
+	 * Verifica que el Pokemon no haya sido capturado previamente.
+	 * @param p La persona (jugador) que sale a capturar.
+	 */
 	private static void capturarPokemons(Persona p) {
 		int opcion = -1;
 		try {
@@ -666,7 +720,10 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Muestra el equipo actual del jugador con nombre, tipo y stats de cada Pokemon.
+	 * @param p La persona (jugador) cuyo equipo se muestra.
+	 */
 	private static void verEquipo(Persona p) {
 		List<Pokemon> equipo = p.getPokemons();
 		if (equipo.isEmpty()) {
@@ -678,7 +735,10 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Lee el archivo Pokedex.txt y crea un Pokemon por cada linea,
+	 * asignandolo a su habitat correspondiente segun su porcentaje de aparicion.
+	 */
 	private static void leerPokemons() throws FileNotFoundException {
 		File arch = new File("Pokedex.txt");
 		Scanner lector = new Scanner(arch);
@@ -717,7 +777,11 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Busca un Habitat en la lista global de habitats por su nombre.
+	 * @param habitat El nombre del habitat a buscar.
+	 * @return El Habitat encontrado, o null si no existe.
+	 */
 	private static Habitat buscarHabitat(String habitat) {
 		for (Habitat h : habitats) {
 			if (h.getNombre().equals(habitat)) {
@@ -727,7 +791,9 @@ public class Main {
 		return null;
 
 	}
-
+	/**
+	 * Lee el archivo Habitats.txt y crea un Habitat por cada linea.
+	 */
 	private static void leerHabitats() throws FileNotFoundException {
 		File arch = new File("Habitats.txt");
 		Scanner lector = new Scanner(arch);
