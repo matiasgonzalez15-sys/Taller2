@@ -342,6 +342,7 @@ public class Main {
 		if (gimnasiosDerrotados < gimnasios.size()) {
 			System.out.println("No puedes batallar contra los Altos Mandos!!!, no has derrotado a todos los gimnasios");
 		} else {
+			boolean ganador = true;
 			for (Persona campeon : altosMandos) {
 				System.out.println("Enfrentandose a " + campeon.getNombre());
 				System.out.println();
@@ -350,9 +351,13 @@ public class Main {
 					System.out.println("Has derrotado a " + campeon.getNombre());
 				} else {
 					System.out.println("Has perdido...");
+					ganador = false;
 					break;
 				}
 			}
+			if(ganador) {
+				System.out.println("Felicidades, eres todo un campeon");
+			}	
 		}
 		System.out.println();
 
